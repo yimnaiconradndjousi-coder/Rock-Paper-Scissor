@@ -1,0 +1,56 @@
+*, *::before,
+*::after {
+    box-sizing: border-box;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    /* outline: 1px solid red; */
+}
+
+body {
+    display: flex;
+
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+}
+
+.actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+.action-icon {
+    width: 70px;
+    cursor: pointer;
+    background-color: rgba(0, 76, 255, 0.136);
+    border-radius: 50%;
+    padding: 5px;
+    transition: all 0.4s ease;
+}
+
+.action-icon:hover {
+    background-color: rgba(250, 194, 65, 0.215);
+    /* background-color: rgba(100, 170, 227, 0.86); */
+}
+
+.action-icon:active {
+    background-color: rgb(255, 198, 64);
+}
