@@ -26,12 +26,26 @@ nav {
 }
 
 .score {
+    display: flex;
+    gap: 2px;
+}
+
+.user-score, .cpu-score {
     align-self: center;
-    font-size: 1.15rem;
     color: white;
     background-color: rgba(0, 192, 74, 0.893);
     padding: 5px 10px;
     border-radius: 5px;
+}
+
+.user-score {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.cpu-score {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 
 .actions {
@@ -56,23 +70,24 @@ nav {
     transition: all 0.4s ease;
 }
 
-.action-icon:nth-child(1):active {
-    background-color: rgba(226, 0, 0, 0.871);
+.action-icon:nth-child(1):hover {
+    background-color: rgba(226, 0, 0, 0.8);
 }
 
-.action-icon:nth-child(2) {
-    background-color: red;
+.action-icon:nth-child(2):hover {
+    background-color: rgba(0, 115, 216, 0.8);
 }
 
-.action-icon:nth-child(3) {
-    background-color: red;
+.action-icon:nth-child(3):hover {
+    background-color: rgba(0, 192, 74, 0.893);
 }
 
-/* 
+
 .action-icon:hover {
-    background-color: rgba(250, 194, 65, 0.215);
-    background-color: rgba(100, 170, 227, 0.86);
-} */
+    /* background-color: rgba(250, 194, 65, 0.215); */
+    /* background-color: rgba(100, 170, 227, 0.86); */
+    background-color: rgba(69, 125, 255, 0.367);
+}
 
 .result {
     display: flex;

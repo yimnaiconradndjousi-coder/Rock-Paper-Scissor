@@ -29,7 +29,7 @@ function GameLogic(setUserAction, setCPUAction, SetScore, Score, userChoiceValue
         } else if ((UserCoice === 0 && CPUChoice === 2) || (UserCoice === 1 && CPUChoice === 0) || (UserCoice === 2 && CPUChoice === 1)) {
             SetScore(Score + 1);
         } else {
-            setCPUScore(CPUScore + 1)
+            setCPUScore(CPUScore + 1);
         }
     }                          
 }
@@ -44,7 +44,7 @@ function UserInput({setUserAction, setCPUAction, SetScore, Score, CPUScore, SetC
                         src={RockImg} 
                         alt="rock image" 
                         className="action-icon" 
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0)}
+                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0, CPUScore, SetCPUScore)}
 
                         }
                     />
@@ -53,14 +53,14 @@ function UserInput({setUserAction, setCPUAction, SetScore, Score, CPUScore, SetC
                         src={PaperImg} 
                         alt="paper image" 
                         className="action-icon"
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 1)}}
+                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 1, CPUScore, SetCPUScore)}}
                     />
 
                     <img 
                         src={ScissorsImg} 
                         alt="scissor image" 
                         className="action-icon"
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 2)}}
+                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 2, CPUScore, SetCPUScore)}}
                     />
                 </div>
             </div>
@@ -79,7 +79,11 @@ function App() {
             <div className="container">
                 <nav>
                     <img src={ReactLogo} alt="react logo" />
-                    <p className="score">Your Score: {Score}</p>
+                    
+                    <div className="score">
+                        <p className="user-score">Your Score: {Score}</p>
+                        <p className="cpu-score">CPU Score: {CpuScore}</p>
+                    </div>
                 </nav>
 
                 <UserInput 
