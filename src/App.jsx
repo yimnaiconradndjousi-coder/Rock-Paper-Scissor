@@ -18,7 +18,7 @@ function getRandomInt() {
     return randomInt
 };
 
-function GameLogic(setUserAction, setCPUAction, SetScore, Score, userChoiceValue) {
+function GameLogic(setUserAction, setCPUAction, SetScore, Score, userChoiceValue, CPUScore, setCPUScore) {
     const UserCoice = userChoiceValue;
     const CPUChoice = getRandomInt();
     setUserAction(UserCoice);
@@ -27,14 +27,14 @@ function GameLogic(setUserAction, setCPUAction, SetScore, Score, userChoiceValue
     if (UserCoice !== null && CPUChoice !== null) {
         if (UserCoice === CPUChoice) {
         } else if ((UserCoice === 0 && CPUChoice === 2) || (UserCoice === 1 && CPUChoice === 0) || (UserCoice === 2 && CPUChoice === 1)) {
-            let newScore = Score + 1;
-            SetScore(newScore);
+            SetScore(Score + 1);
         } else {
+            setCPUScore(CPUScore + 1)
         }
     }                          
 }
 
-function UserInput({setUserAction, setCPUAction, SetScore, Score}) {
+function UserInput({setUserAction, setCPUAction, SetScore, Score, CPUScore, SetCPUScore}) {
 
     return (
         <>
@@ -44,7 +44,9 @@ function UserInput({setUserAction, setCPUAction, SetScore, Score}) {
                         src={RockImg} 
                         alt="rock image" 
                         className="action-icon" 
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0)}}
+                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0)}
+
+                        }
                     />
 
                     <img 
@@ -67,21 +69,34 @@ function UserInput({setUserAction, setCPUAction, SetScore, Score}) {
 }
 
 function App() {
-    const [UserCoice, setUserChoice] = useState(null)
-    const [CPUChoice, setCPUChoice] = useState(null)
-    const [Score, SetScore] = useState(0)
+    const [UserCoice, setUserChoice] = useState(null);
+    const [CPUChoice, setCPUChoice] = useState(null);
+    const [Score, SetScore] = useState(0);
+    const [CpuScore, setCpuscore] = useState(0);
 
     return (
         <>
             <div className="container">
                 <nav>
                     <img src={ReactLogo} alt="react logo" />
-                    <p>Rock|Paper|Scissors Game</p>
+                    <p className="score">Your Score: {Score}</p>
                 </nav>
-                <UserInput setUserAction={setUserChoice} setCPUAction={setCPUChoice} SetScore={SetScore} UserCoice={UserCoice} CPUChoice={CPUChoice} Score={Score} />
-                <p>User Choice: {actionList[UserCoice]?.action}</p>
-                <p>CPU Choice: {actionList[CPUChoice]?.action}</p>
-                <p>Score: {Score}</p>
+
+                <UserInput 
+                    setUserAction={setUserChoice} 
+                    setCPUAction={setCPUChoice} 
+                    SetScore={SetScore} 
+                    UserCoice={UserCoice} 
+                    CPUChoice={CPUChoice} 
+                    Score={Score} 
+                    CPUScore={CpuScore}
+                    SetCPUScore={setCpuscore}/>
+
+                <div className="result">
+                    <p>User Choice: <span className="userchoice">{actionList[UserCoice]?.action}</span></p>
+                    <p>CPU Choice: <span className="cpuchoice">{actionList[CPUChoice]?.action}</span></p>
+                </div>
+
             </div>
         </>
     )
