@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {useEffect} from "react";
 import "./App.css";
 import ReactLogo from "./assets/react.svg";   
 import RockImg from "./assets/Rock.png";
@@ -8,9 +9,9 @@ import ScissorsImg from "./assets/Scissors.png";
 // 0: Rock, 1: Paper, 2: Scissors
 
 const actionList = [
-  { action: "rock", id: 0 },
-  { action: "paper", id: 1 },
-  { action: "scissor", id: 2 }
+  { action: "rock", id: 0},
+  { action: "paper", id: 1},
+  { action: "scissor", id: 2}
 ];
 
 function getRandomInt() {
@@ -45,7 +46,6 @@ function UserInput({setUserAction, setCPUAction, SetScore, Score, CPUScore, SetC
                         alt="rock image" 
                         className="action-icon" 
                         onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0, CPUScore, SetCPUScore)}
-
                         }
                     />
 
@@ -73,6 +73,15 @@ function App() {
     const [CPUChoice, setCPUChoice] = useState(null);
     const [Score, SetScore] = useState(0);
     const [CpuScore, setCpuscore] = useState(0);
+    const [userClick, setUserClick] = useState(false);
+    const [cpuClick, setCpuClick] = useState(false);
+
+    useEffect(() => {
+        setCpuClick(true)
+        if (cpuClick == true) {
+            
+        }
+    }, [UserCoice]);
 
     return (
         <>
@@ -94,11 +103,19 @@ function App() {
                     CPUChoice={CPUChoice} 
                     Score={Score} 
                     CPUScore={CpuScore}
-                    SetCPUScore={setCpuscore}/>
+                    SetCPUScore={setCpuscore}
+                />
 
                 <div className="result">
-                    <p>User Choice: <span className="userchoice">{actionList[UserCoice]?.action}</span></p>
-                    <p>CPU Choice: <span className="cpuchoice">{actionList[CPUChoice]?.action}</span></p>
+                    <div className="result-container">
+                        <p className="userchoice">User Choice:</p>
+                        <span className="action-color">{actionList[UserCoice]?.action}</span>
+                    </div>
+
+                    <div className="result-container">
+                        <p className="cpuchoice">CPU Choice: </p>
+                        <span className="action-color">{actionList[CPUChoice]?.action}</span>
+                    </div>
                 </div>
 
             </div>
