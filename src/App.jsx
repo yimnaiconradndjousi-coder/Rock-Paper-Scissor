@@ -6,8 +6,6 @@ import RockImg from "./assets/Rock.png";
 import PaperImg from "./assets/Paper.png";
 import ScissorsImg from "./assets/Scissors.png";
 
-// 0: Rock, 1: Paper, 2: Scissors
-
 const actionList = [
   { action: "rock", id: 0},
   { action: "paper", id: 1},
@@ -19,69 +17,40 @@ function getRandomInt() {
     return randomInt
 };
 
-function GameLogic(setUserAction, setCPUAction, SetScore, Score, userChoiceValue, CPUScore, setCPUScore) {
-    const UserCoice = userChoiceValue;
+function ActionOnclick(setUserAction, setCPUAction, actionID) {
+    const UserChoice = actionID;
     const CPUChoice = getRandomInt();
-    setUserAction(UserCoice);
-    setCPUAction(CPUChoice);
-
-    if (UserCoice !== null && CPUChoice !== null) {
-        if (UserCoice === CPUChoice) {
-        } else if ((UserCoice === 0 && CPUChoice === 2) || (UserCoice === 1 && CPUChoice === 0) || (UserCoice === 2 && CPUChoice === 1)) {
-            SetScore(Score + 1);
-        } else {
-            setCPUScore(CPUScore + 1);
-        }
-    }                          
+    setUserAction(UserChoice);
+    setCPUAction(CPUChoice);                   
 }
 
-function UserInput({setUserAction, setCPUAction, SetScore, Score, CPUScore, SetCPUScore}) {
-
+function GameAction({ Img, Alt, SetUserAction, SetCPUAction, actionID, actionOnclik}) {
     return (
-        <>
-            <div className="actions">
-                <div className="actions-container">
-                    <img 
-                        src={RockImg} 
-                        alt="rock image" 
-                        className="action-icon" 
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 0, CPUScore, SetCPUScore)}
-                        }
-                    />
-
-                    <img 
-                        src={PaperImg} 
-                        alt="paper image" 
-                        className="action-icon"
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 1, CPUScore, SetCPUScore)}}
-                    />
-
-                    <img 
-                        src={ScissorsImg} 
-                        alt="scissor image" 
-                        className="action-icon"
-                        onClick={() => {GameLogic(setUserAction, setCPUAction, SetScore, Score, 2, CPUScore, SetCPUScore)}}
-                    />
-                </div>
-            </div>
-        </>
+        <img 
+            src={Img} 
+            alt={Alt} 
+            className="action-icon" 
+            onClick={() =>  {actionOnclik(SetUserAction, SetCPUAction, actionID)}}
+        />
     )
 }
 
 function App() {
-    const [UserCoice, setUserChoice] = useState(null);
+    const [UserChoice, setUserChoice] = useState(null);
     const [CPUChoice, setCPUChoice] = useState(null);
     const [Score, SetScore] = useState(0);
     const [CpuScore, setCpuscore] = useState(0);
-    const [userClick, setUserClick] = useState(false);
-    const [cpuClick, setCpuClick] = useState(false);
 
     useEffect(() => {
-        setCpuClick(true)
-        if (cpuClick == true) {
-            
-        }
-    }, [UserCoice]);
+        if (UserChoice !== null && CPUChoice !== null) {
+            if (UserChoice === CPUChoice) {
+            } else if ((UserChoice === 0 && CPUChoice === 2) || (UserChoice === 1 && CPUChoice === 0) || (UserChoice === 2 && CPUChoice === 1)) {
+                SetScore(Score + 1);
+            } else {
+                setCpuscore(CpuScore + 1);
+            }
+        }       
+    }, [UserChoice, CPUChoice]);
 
     return (
         <>
@@ -95,21 +64,43 @@ function App() {
                     </div>
                 </nav>
 
-                <UserInput 
-                    setUserAction={setUserChoice} 
-                    setCPUAction={setCPUChoice} 
-                    SetScore={SetScore} 
-                    UserCoice={UserCoice} 
-                    CPUChoice={CPUChoice} 
-                    Score={Score} 
-                    CPUScore={CpuScore}
-                    SetCPUScore={setCpuscore}
-                />
+                <div className="actions">
+                    <div className="actions-container">
+
+                        <GameAction 
+                            Img={RockImg}
+                            Alt={"Rock action"}  
+                            SetUserAction={setUserChoice}
+                            SetCPUAction={setCPUChoice}
+                            actionID={0}
+                            actionOnclik={ActionOnclick}
+                        />
+
+                        <GameAction 
+                            Img={PaperImg}
+                            Alt={"Paper action"}  
+                            SetUserAction={setUserChoice}
+                            SetCPUAction={setCPUChoice}
+                            actionID={1}
+                            actionOnclik={ActionOnclick}
+                        />
+
+                        <GameAction 
+                            Img={ScissorsImg}
+                            Alt={"Scissors action"}  
+                            SetUserAction={setUserChoice}
+                            SetCPUAction={setCPUChoice}
+                            actionID={2}
+                            actionOnclik={ActionOnclick}
+                        />
+
+                    </div>
+                </div>
 
                 <div className="result">
                     <div className="result-container">
                         <p className="userchoice">User Choice:</p>
-                        <span className="action-color">{actionList[UserCoice]?.action}</span>
+                        <span className="action-color">{actionList[UserChoice]?.action}</span>
                     </div>
 
                     <div className="result-container">
