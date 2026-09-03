@@ -6,6 +6,7 @@ import RockImg from "./assets/Rock.png";
 import PaperImg from "./assets/Paper.png";
 import ScissorsImg from "./assets/Scissors.png";
 
+
 const actionList = [
   { action: "rock", id: 0},
   { action: "paper", id: 1},
